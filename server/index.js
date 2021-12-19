@@ -1,13 +1,17 @@
 const express = require('express');
+const cors = require('cors');
 const { LEDMode } = require('./Enums');
 const { LEDRequest } = require('./Types');
+
 const app = express();
-app.use(express.urlencoded())
+app.use(cors());
+app.use(express.json())
 
 const PORT = 3000;
 var ledQueue = [];
 var current = null;
 
+// Routes
 app.get('/', (req, res) => {
   console.log(`Dequeue`);
   current = ledQueue.shift();
@@ -19,10 +23,14 @@ app.get('/current', (req, res) => {
   res.send(current);
 });
 
-app.get('/getqueue', (req, res) => {
-  res.send(ledQueue);
-})
+app.post('/add', (req, res) => {
+  console.log(`Enqueue`);
+  console.log(req.body)
+  ledQueue.push(new LEDRequest(req.body));
+  res.send('Added');
+});
 
+// Testing Routes
 app.get('/add', (req, res) => {
   console.log(`Test Enqueue`);
   let ledRequest = new LEDRequest({
@@ -33,13 +41,11 @@ app.get('/add', (req, res) => {
   res.send(ledQueue);
 });
 
-app.post('/add', (req, res) => {
-  console.log(`Enqueue`);
-  console.log(new LEDRequest(req.body));
-  ledQueue.push(new LEDRequest(req.body));
-  res.send('Added');
-})
+app.get('/getqueue', (req, res) => {
+  res.send(ledQueue);
+});
 
+// Start Server
 app.listen(PORT, () => {
   console.log(`Server stated on port ${PORT}`);
 });
