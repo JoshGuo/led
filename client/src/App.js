@@ -16,8 +16,8 @@ const styles = {
     flexWrap: 'wrap'
   },
   card: {
-    width: '320px',
-    height: '200px',
+    width: '300px',
+    height: '150px',
     pl: 2,
     pr: 2,
     marginBottom: isDesktop ? 3 : 2,
@@ -35,21 +35,22 @@ const styles = {
 }
 
 function LedCard({config, sendRequestCallback}) {
-  const { name, desc, customizable, mode} = config;
+  const { name, desc, customizable, mode, setting, color, disabled} = config;
   const buttonTxt = customizable ? 'Customize' : 'Select';
 
   return (
     <Card sx={styles.card}>
-      <Stack sx={{mt: 4}} alignItems="center" height="100%">
-        <Typography variant="h4" align="center">{name}</Typography>
+      <Stack sx={{mt: 2}} alignItems="center" height="100%">
+        <Typography variant="h5" align="center">{name}</Typography>
         <Typography variant="body2" align="center" sx={{mt: 1}}>{desc}</Typography>
         <Button 
           variant="outlined" 
+          disabled={disabled ?? false}
           endIcon={<Send/>} 
-          onClick={() => sendRequestCallback("test user", mode)} 
-          sx={{position: 'relative', top: 40, color: 'white', borderColor: 'white'}}
+          onClick={() => sendRequestCallback("test user", mode, setting ?? -1, color ?? '#000000')} 
+          sx={{position: 'relative', top: 20, color: 'white', borderColor: 'white'}}
         >
-          {buttonTxt}
+          {disabled ? "Disabled" : buttonTxt}
         </Button>
       </Stack> 
     </Card>
@@ -57,14 +58,14 @@ function LedCard({config, sendRequestCallback}) {
 }
 
 function App() {
-  const sendLedRequest = (name, mode) => {
+  const sendLedRequest = (name, mode, setting, color) => {
     fetch(`${process.env.REACT_APP_API_URI}/add`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({name: name, mode: mode})
+      body: JSON.stringify({name: name, mode: mode, setting: setting, color: color})
     })
   }
 
