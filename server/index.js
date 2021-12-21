@@ -12,7 +12,7 @@ const { LEDMode } = require('./Enums');
 const { LEDRequest } = require('./Types');
 // const server = http.createServer(app);
 
-const PORT = 3000;
+const PORT = process.env.PORT ?? 3000;
 var ledQueue = [];
 var current = null;
 
