@@ -1,56 +1,20 @@
 {
   "led_modes": [
     {
-      "name": "Off 😴",
-      "desc": "Turn off the leds",
-      "mode": 0
-    },
-    {
       "name": "Cool Fade 🧊",
-      "desc": "A blend of cool colors across the strip (my fav)",
+      "desc": "aurora borealis or something idk",
       "mode": 2,
       "setting": 2
     },
     {
-      "name": "Single Color 💡",
-      "desc": "Choose a color to light up the whole strip",
-      "mode": 1,
-      "customizable": true,
-      "disabled": true
-    },
-    {
-      "name": "Warm Fade 🥵",
-      "desc": "A blend of warm colors across the strip",
-      "mode": 2,
-      "setting": 1
-    },
-    {
       "name": "Sparkle ✨",
-      "desc": "some twinkling idk yet",
+      "desc": "kinda like stars",
       "mode": 3,
       "setting": 0
     },
     {
-      "name": "rainbow Sparkle ✨",
-      "desc": "some twinkling idk yet",
-      "mode": 3,
-      "setting": 1
-    },
-    {
-      "name": "Sexy Sparkle ✨",
-      "desc": "iykyk",
-      "mode": 3,
-      "setting": 2
-    },
-    {
-      "name": "Calm Sparkle ✨",
-      "desc": "some twinkling idk yet",
-      "mode": 3,
-      "setting": 3
-    },
-    {
       "name": "Rainbow Fade 🌈",
-      "desc": "A full rainbow blend across the strip",
+      "desc": "colors",
       "mode": 2,
       "setting": 0
     }

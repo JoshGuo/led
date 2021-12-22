@@ -13,14 +13,11 @@ const { LEDRequest } = require('./Types');
 // const server = http.createServer(app);
 
 const PORT = process.env.PORT ?? 3000;
-var ledQueue = [];
-var current = null;
-
-// Routes
-app.get('/', (req, res) => {
-  console.log(`Dequeue`);
-  current = ledQueue.shift();
-  res.send(current);
+var current = new LEDRequest({
+  name: 'Josh',
+  mode: 3,
+  setting: 2,
+  color: '#000000'
 });
 
 app.get('/current', (req, res) => {
@@ -32,8 +29,7 @@ app.post('/add', (req, res) => {
   console.log(`Enqueue`);
   console.log(req.body)
   const ledReq = new LEDRequest(req.body);
-  ledQueue.push(ledReq);
-  res.send('Added');
+  current = ledReq;
   io.emit('update', ledReq);
 });
 
@@ -50,7 +46,6 @@ app.get('/add', (req, res) => {
 
 app.get('/getqueue', (req, res) => {
   res.send(ledQueue);
-  io.emit('Update', ledQueue);
 });
 
 // Start Server
@@ -61,4 +56,5 @@ server.listen(PORT, () => {
 // Socket
 io.on('connection', (socket) => {
   console.log('On connect');
-})
+  socket.emit('update', current);
+});
