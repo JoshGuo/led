@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/leds/static/css/main.655481d8.css",
-    "main.js": "/leds/static/js/main.29840636.js",
+    "main.js": "/leds/static/js/main.7fe4bafa.js",
     "index.html": "/leds/index.html",
     "main.655481d8.css.map": "/leds/static/css/main.655481d8.css.map",
-    "main.29840636.js.map": "/leds/static/js/main.29840636.js.map"
+    "main.7fe4bafa.js.map": "/leds/static/js/main.7fe4bafa.js.map"
   },
   "entrypoints": [
     "static/css/main.655481d8.css",
-    "static/js/main.29840636.js"
+    "static/js/main.7fe4bafa.js"
   ]
 }
