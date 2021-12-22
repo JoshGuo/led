@@ -31,6 +31,7 @@ app.post('/add', (req, res) => {
   const ledReq = new LEDRequest(req.body);
   current = ledReq;
   io.emit('update', ledReq);
+  res.send('Done!');
 });
 
 // Testing Routes

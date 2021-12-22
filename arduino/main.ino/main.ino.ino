@@ -5,7 +5,7 @@
 #include <WebSocketsClient.h>
 #include <SocketIOclient.h>
 
-#define ENV 0
+#define ENV 1
 
 #define WIFI_SSID "f231fa"
 #define WIFI_PASS "gain.037.barrier"
@@ -25,7 +25,7 @@ const String API_URI = ENV == 0 ? "192.168.1.98" : "jguo-led.herokuapp.com";
 
 NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> strip(NUM_LEDS);
 int currMode = 1;
-int setting = 3;
+int setting = 0;
 float colorSetting = 0;
 HsbColor ledState[NUM_LEDS];
 boolean pulseUp = true;
@@ -345,7 +345,7 @@ void setup() {
   initMode(currMode, setting, colorSetting);
   strip.Show();
 
-  socketIO.begin(API_URI, 3000, "/socket.io/?EIO=4");
+  socketIO.begin(API_URI, 80, "/socket.io/?EIO=4");
   socketIO.onEvent(socketIOEvent);
 }
 
