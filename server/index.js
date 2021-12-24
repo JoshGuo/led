@@ -15,9 +15,9 @@ const { LEDRequest } = require('./Types');
 const PORT = process.env.PORT ?? 3000;
 var current = new LEDRequest({
   name: 'Josh',
-  mode: 3,
+  mode: 0,
   setting: 2,
-  color: '#000000'
+  color: 0.0
 });
 
 app.get('/current', (req, res) => {

@@ -11,8 +11,7 @@
 #define WIFI_PASS "gain.037.barrier"
 
 #define NUM_LEDS 300
-#define BRIGHTNESS 100
-#define LIGHTNESS .34f
+#define LIGHTNESS .25f
 #define LED_PIN_OUT 4
 
 #define MAX_SPARKLING 175
@@ -24,7 +23,7 @@ SocketIOclient socketIO;
 const String API_URI = ENV == 0 ? "192.168.1.98" : "jguo-led.herokuapp.com";
 
 NeoPixelBus<NeoGrbFeature, Neo800KbpsMethod> strip(NUM_LEDS);
-int currMode = 1;
+int currMode = 0;
 int setting = 0;
 float colorSetting = 0;
 HsbColor ledState[NUM_LEDS];
@@ -184,7 +183,7 @@ void doFade() {
       strip.SetPixelColor(i, ledState[i]); 
     }
   } else {
-    delay(50);
+    delay(20);
     strip.RotateRight(1);
   }
 }
