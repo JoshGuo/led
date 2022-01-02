@@ -14,7 +14,7 @@
 #define LIGHTNESS .25f
 #define LED_PIN_OUT 4
 
-#define MAX_SPARKLING 175
+#define MAX_SPARKLING 125
 #define MAX_SPARKLING_LIGHTNESS .7f
 
 // HTTP Vars
@@ -218,7 +218,7 @@ void doSparkle() {
   if(numSparkling < MAX_SPARKLING) {
     boolean found = false;
     int randInt = random(0, 100);
-    while(!found && randInt < 10) {
+    while(!found && randInt < 15) {
       int randLed = random(0, NUM_LEDS);
       if(sparkleStates[randLed] == 0) {
         found = true;
@@ -231,7 +231,7 @@ void doSparkle() {
   // Raise and dim led brightnesses
   for(int i = 0; i < NUM_LEDS; i++) {
     if(sparkleStates[i] == 2) {
-      ledState[i].B -= .002f;
+      ledState[i].B -= .0035f;
       if(ledState[i].B < 0.0f) {
         ledState[i].B = 0.0f;
         sparkleStates[i] = 0;
@@ -240,7 +240,7 @@ void doSparkle() {
     }
     
     if(sparkleStates[i] == 1) {
-      ledState[i].B += .003f;
+      ledState[i].B += .005f;
       if(ledState[i].B > MAX_SPARKLING_LIGHTNESS) {
         ledState[i].B = MAX_SPARKLING_LIGHTNESS;
         sparkleStates[i] = 2;
@@ -248,6 +248,7 @@ void doSparkle() {
     }
     strip.SetPixelColor(i, ledState[i]);
   }
+  delay(20);
 }
 
 void initMode(int newMode, int newSetting, float newColor) {
@@ -274,6 +275,7 @@ void initMode(int newMode, int newSetting, float newColor) {
 }
 
 void connectToWifi() {
+  Serial.println("Connecting to WiFi");
   // disable AP
   if(WiFi.getMode() & WIFI_AP) {
       WiFi.softAPdisconnect(true);
@@ -338,11 +340,11 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
 
-  connectToWifi();
-  
   strip.Begin();
   initMode(currMode, setting, colorSetting);
   strip.Show();
+
+  connectToWifi();
 
   socketIO.begin(API_URI, 80, "/socket.io/?EIO=4");
   socketIO.onEvent(socketIOEvent);
